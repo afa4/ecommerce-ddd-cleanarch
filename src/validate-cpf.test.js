@@ -30,6 +30,11 @@ test('should return false if input has illegal chars', () => {
   expect(result).toBe(false);
 });
 
+test('should return false if all input digits are equal', () => {
+  const result = cpfValidator.validate("111.111.111-11");
+  expect(result).toBe(false);
+});
+
 test.each([
   '935.411.347-80',
   '111.444.777-35',

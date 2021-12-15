@@ -37,16 +37,16 @@ function calculateSecondVerifyer(str) {
   return getVerifyerFromSum(sumOfFirstTenDigits);
 }
 
-function validate(cpf) {
-  if (cpf == null || typeof cpf !== 'string') {
-    return false;
-  }
+function isBlocked(cpf) {
+  let [firstDigit] = cpf; // destruction
+  return [...cpf].every((digit) => digit === firstDigit);
+}
 
-  cpf = removeSpecialChars(cpf);
-
-  if (!isElevenDigitsString(cpf)) {
-    return false;
-  }
+function validate(rawCpf) {
+  if (!rawCpf || typeof rawCpf !== 'string') return false;
+  const cpf = removeSpecialChars(rawCpf);
+  if (!isElevenDigitsString(cpf)) return false;
+  if(isBlocked(cpf)) return false;
 
   const firstNineDigits = cpf.substring(0, 9);
   const firstVerifyer = calculateFirstVerifyer(firstNineDigits);
