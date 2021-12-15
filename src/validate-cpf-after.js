@@ -1,51 +1,63 @@
 function removeSpecialChars(str) {
   return str
-    .replace(".", "")
-    .replace(".", "")
-    .replace("-", "")
-    .replace(" ", "");
+    .replace('.', '')
+    .replace('.', '')
+    .replace('-', '')
+    .replace(' ', '');
 }
 
 function isElevenDigitsString(str) {
   return str.match(/[0-9]/g).length === 11;
 }
 
-function validate(str) {
-  if (str == null || typeof str !== "string") {
+function getVerifyerFromSum(digitsSum) {
+  let moduleByEleven = digitsSum % 11;
+  return moduleByEleven < 2 ? 0 : 11 - moduleByEleven;
+}
+
+function calculateFirstVerifyer(str) {
+  let digit;
+  let sumOfFirstNineDigits = 0;
+  for (let i = 0; i < 9; i++) {
+    digit = parseInt(str.substring(i, i + 1));
+    sumOfFirstNineDigits += (10 - i) * digit;
+  }
+
+  return getVerifyerFromSum(sumOfFirstNineDigits);
+}
+
+function calculateSecondVerifyer(str) {
+  let digit;
+  let sumOfFirstTenDigits = 0;
+  for (let i = 0; i < 10; i++) {
+    digit = parseInt(str.substring(i, i + 1));
+    sumOfFirstTenDigits += (11 - i) * digit;
+  }
+
+  return getVerifyerFromSum(sumOfFirstTenDigits);
+}
+
+function validate(cpf) {
+  if (cpf == null || typeof cpf !== 'string') {
     return false;
   }
 
-  str = removeSpecialChars(str);
+  cpf = removeSpecialChars(cpf);
 
-  if (!isElevenDigitsString(str)) {
+  if (!isElevenDigitsString(cpf)) {
     return false;
   }
 
-  let d1, d2;
-  let dg1, dg2, rest;
-  let digito;
-  let nDigResult;
-  d1 = d2 = 0;
-  dg1 = dg2 = rest = 0;
+  let firstNineDigits = cpf.substring(0, 9);
+  let firstVerifyer = calculateFirstVerifyer(firstNineDigits);
 
-  for (let nCount = 1; nCount < str.length - 1; nCount++) {
-    digito = parseInt(str.substring(nCount - 1, nCount));
-    d1 = d1 + (11 - nCount) * digito;
+  let expectedFirstTenDigits = firstNineDigits.concat(firstVerifyer);
+  let secondVerifyer = calculateSecondVerifyer(expectedFirstTenDigits);
 
-    d2 = d2 + (12 - nCount) * digito;
-  }
+  let expectedVerifyers = [firstVerifyer, secondVerifyer].join('');
+  let actualVerifyers = cpf.substring(cpf.length - 2, cpf.length);
 
-  rest = d1 % 11;
-
-  dg1 = rest < 2 ? (dg1 = 0) : 11 - rest;
-  d2 += 2 * dg1;
-  rest = d2 % 11;
-  if (rest < 2) dg2 = 0;
-  else dg2 = 11 - rest;
-
-  let nDigVerific = str.substring(str.length - 2, str.length);
-  nDigResult = "" + dg1 + "" + dg2;
-  return nDigVerific == nDigResult;
+  return actualVerifyers == expectedVerifyers;
 }
 
 module.exports = {
