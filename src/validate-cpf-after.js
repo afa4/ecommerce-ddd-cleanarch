@@ -48,16 +48,14 @@ function validate(cpf) {
     return false;
   }
 
-  let firstNineDigits = cpf.substring(0, 9);
-  let firstVerifyer = calculateFirstVerifyer(firstNineDigits);
+  const firstNineDigits = cpf.substring(0, 9);
+  const firstVerifyer = calculateFirstVerifyer(firstNineDigits);
+  const expectedFirstTenDigits = firstNineDigits.concat(firstVerifyer);
+  const secondVerifyer = calculateSecondVerifyer(expectedFirstTenDigits);
+  const expectedVerifyers = [firstVerifyer, secondVerifyer].join('');
+  const actualVerifyers = cpf.substring(cpf.length - 2, cpf.length);
 
-  let expectedFirstTenDigits = firstNineDigits.concat(firstVerifyer);
-  let secondVerifyer = calculateSecondVerifyer(expectedFirstTenDigits);
-
-  let expectedVerifyers = [firstVerifyer, secondVerifyer].join('');
-  let actualVerifyers = cpf.substring(cpf.length - 2, cpf.length);
-
-  return actualVerifyers == expectedVerifyers;
+  return actualVerifyers === expectedVerifyers;
 }
 
 module.exports = {
