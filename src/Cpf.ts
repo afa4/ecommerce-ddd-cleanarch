@@ -3,14 +3,13 @@ const SECOND_DIGIT_FACTOR = 11;
 
 export default class Cpf {
   value: string;
-  
+
   constructor(value: string) {
-    if(!this.isValid(value)) throw new Error('Invalid cpf');
+    if (!this.isValid(value)) throw new Error("Invalid cpf");
     this.value = value;
   }
 
   private isValid(rawCpf: string): boolean {
-    if (!rawCpf || typeof rawCpf !== "string") return false;
     const cpf = this.clean(rawCpf);
     if (!this.isElevenDigitsString(cpf)) return false;
     if (this.isBlocked(cpf)) return false;
@@ -25,8 +24,8 @@ export default class Cpf {
       expectedFirstTenDigits,
       SECOND_DIGIT_FACTOR
     );
-    const expectedVerifyers = [firstVerifyer, secondVerifyer].join("");
-    const actualVerifyers = cpf.substring(cpf.length - 2, cpf.length);
+    const expectedVerifyers = `${firstVerifyer}${secondVerifyer}`;
+    const actualVerifyers = cpf.slice(9);
 
     return actualVerifyers === expectedVerifyers;
   }
@@ -54,6 +53,6 @@ export default class Cpf {
     }
 
     let moduleByEleven = digitsSum % 11;
-    return moduleByEleven < 2 ? 0 : 11 - moduleByEleven;
+    return (moduleByEleven < 2) ? 0 : 11 - moduleByEleven;
   }
 }

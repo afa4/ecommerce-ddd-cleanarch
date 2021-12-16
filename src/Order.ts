@@ -5,16 +5,16 @@ import OrderItem from './OrderItem';
 
 export default class Order {
   cpf: Cpf;
-  items: OrderItem[];
+  orderItems: OrderItem[];
   coupon: Coupon | undefined;
 
   constructor(rawCpf: string) {
     this.cpf = new Cpf(rawCpf);
-    this.items = [];
+    this.orderItems = [];
   }
 
   addItem(item: Item, quantity: number) {
-    this.items.push(new OrderItem(item.id, item.price, quantity));
+    this.orderItems.push(new OrderItem(item.id, item.price, quantity, item.volume.m3, item.volume.density));
   }
 
   addCoupon(coupon: Coupon) {
@@ -22,7 +22,15 @@ export default class Order {
   }
 
   getTotal(): number {
-    const total = this.items.reduce((total, orderItem) => total + orderItem.getTotal(), 0);
+    const total = this.orderItems.reduce((total, orderItem) => total + orderItem.getTotal(), 0);
     return total * (this.coupon?.getDiscountMultiplicationFactor() ?? 1);
+  }
+
+  getShippingTotal(distance: number): number {
+    let shippingTotal = 0;
+    for(const orderItem of this.orderItems) {
+      shippingTotal += orderItem.getShippingTotal(distance);
+    }
+    return shippingTotal;
   }
 }
