@@ -23,9 +23,6 @@ export default class Order {
 
   getTotal(): number {
     const total = this.items.reduce((total, orderItem) => total + orderItem.getTotal(), 0);
-    if(this.coupon) {
-      return total * (1 - (this.coupon.discountPercentage / 100));
-    }
-    return total;
+    return total * (this.coupon?.getDiscountMultiplicationFactor() ?? 1);
   }
 }

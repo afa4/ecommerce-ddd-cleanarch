@@ -26,3 +26,10 @@ test("should add discount cupon", () => {
   order.addCoupon(new Coupon("VALE20", 20));
   expect(order.getTotal()).toBe(80);
 });
+
+test("should not apply expired discount cupon", () => {
+  let order = new Order('935.411.347-80');
+  order.addItem(new Item('1', 'Book', 50), 2);
+  order.addCoupon(new Coupon('VALE20', 20, new Date('2019-01-01')));
+  expect(order.getTotal()).toBe(100);
+});
