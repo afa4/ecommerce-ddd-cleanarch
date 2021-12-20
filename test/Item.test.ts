@@ -8,10 +8,10 @@ test('should create item', () => {
 
 test('should calculate volume in m3 based on dimensions', () => {
   const volume = new ItemVolume(20, 15, 10, 1);
-  expect(volume.m3).toBe(0.003);
+  expect(volume.getVolume()).toBe(0.003);
 });
 
 test('should calculate density based on volume and weight', () => {
   const volume = new ItemVolume(20, 15, 10, 1);
-  expect(volume.density).toBeCloseTo(333.33);
+  expect(volume.getDensity()).toBeCloseTo(333.33);
 });

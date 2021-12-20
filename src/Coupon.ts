@@ -13,6 +13,6 @@ export default class Coupon {
   }
 
   private isExpired() {
-    return this.expiration && this.expiration.getTime() < new Date().getTime();
+    return this.expiration && this.expiration.getTime() < new Date().getTime(); // TODO: inverter a dependencia da data
   }
 }
