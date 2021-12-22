@@ -8,7 +8,7 @@ export default class Order {
   orderItems: OrderItem[];
   coupon: Coupon | undefined;
 
-  constructor(rawCpf: string) {
+  constructor(rawCpf: string, readonly createdAt: Date = new Date()) {
     this.cpf = new Cpf(rawCpf);
     this.orderItems = [];
   }
@@ -18,12 +18,14 @@ export default class Order {
   }
 
   addCoupon(coupon: Coupon) {
-    this.coupon = coupon;
+    if(!coupon.isExpired(this.createdAt)) {
+      this.coupon = coupon;
+    }
   }
 
   getTotal(): number {
     const total = this.orderItems.reduce((total, orderItem) => total + orderItem.getTotal(), 0);
-    return total * (this.coupon?.getDiscountMultiplicationFactor() ?? 1);
+    return total - (this.coupon?.getDiscount(total, this.createdAt) ?? 0);
   }
 
   getShippingTotal(distance: number): number {

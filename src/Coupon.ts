@@ -5,14 +5,18 @@ export default class Coupon {
     private readonly expiration: Date | undefined = undefined
   ) {}
 
-  getDiscountMultiplicationFactor() {
-    if(this.isExpired()) {
-      return 1;
+  getDiscount(value: number, referenceDate: Date = new Date()): number {
+    if(this.isExpired(referenceDate)) {
+      return 0;
     }
-    return 1 - this.discountPercentage / 100;
+
+    return value * this.discountPercentage / 100
   }
 
-  private isExpired() {
-    return this.expiration && this.expiration.getTime() < new Date().getTime(); // TODO: inverter a dependencia da data
+  isExpired(referenceDate: Date = new Date()): boolean {
+    if(!this.expiration) {
+      return false;
+    }
+    return this.expiration.getTime() < referenceDate.getTime(); // TODO: inverter a dependencia da data
   }
 }
