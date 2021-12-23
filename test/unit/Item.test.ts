@@ -1,5 +1,5 @@
-import Item from '../src/Item';
-import ItemVolume from '../src/ItemVolume';
+import Item from '../../src/domain/Item';
+import ItemVolume from '../../src/domain/ItemVolume';
 
 test('should create item', () => {
   const volume = new ItemVolume(20, 15, 10, 1);

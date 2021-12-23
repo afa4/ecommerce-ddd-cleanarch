@@ -1,4 +1,4 @@
-import Cpf from '../src/Cpf';
+import Cpf from '../../src/domain/Cpf';
 
 test('should throw invalid cpf error if input length is less than 11', () => {
   expect(() => new Cpf('935.411.347-8')).toThrow(new Error('Invalid cpf'));

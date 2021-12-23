@@ -1,4 +1,4 @@
-import Coupon from '../src/Coupon';
+import Coupon from '../../src/domain/Coupon';
 
 test('should create item', () => {
   expect(new Coupon("VALE50", 50)).toBeTruthy();

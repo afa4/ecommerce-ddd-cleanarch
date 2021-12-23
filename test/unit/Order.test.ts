@@ -1,7 +1,7 @@
-import Coupon from '../src/Coupon';
-import Item from '../src/Item';
-import ItemVolume from '../src/ItemVolume';
-import Order from '../src/Order';
+import Coupon from '../../src/domain/Coupon';
+import Item from '../../src/domain/Item';
+import ItemVolume from '../../src/domain/ItemVolume';
+import Order from '../../src/domain/Order';
 
 let order: Order;
 const dummyVolume = new ItemVolume();
