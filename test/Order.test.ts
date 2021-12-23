@@ -41,28 +41,28 @@ test('should calculate minimum shipping price', () => {
   const volume = new ItemVolume(20, 15, 10, 1);
   const book = new Item('1', 'Book', 50, volume);
   order.addItem(book, 1);
-  expect(order.getShippingTotal(1000)).toBe(10);
+  expect(order.getFreight()).toBe(10);
 });
 
 test('should calculate Freezer shipping price', () => {
   const volume = new ItemVolume(200, 100, 50, 40);
   const freezer =  new Item('1', 'Freezer', 50, volume);
   order.addItem(freezer, 1);
-  expect(order.getShippingTotal(1000)).toBe(400);
+  expect(order.getFreight()).toBe(400);
 });
 
 test('should calculate Guittar shipping price', () => {
   const volume = new ItemVolume(100, 30, 10, 3);
   const guittar =  new Item('1', 'Guittar', 50, volume);
   order.addItem(guittar, 1);
-  expect(order.getShippingTotal(1000)).toBeCloseTo(30);
+  expect(order.getFreight()).toBe(30);
 });
 
 test('should calculate two Guittar shipping price', () => {
   const volume = new ItemVolume(100, 30, 10, 3);
   const guittar =  new Item('1', 'Guittar', 50, volume);
   order.addItem(guittar, 2);
-  expect(order.getShippingTotal(1000)).toBeCloseTo(60);
+  expect(order.getFreight()).toBe(60);
 });
 
 test('should calculate Book, Freezer and Guittar shipping price', () => {
@@ -77,5 +77,5 @@ test('should calculate Book, Freezer and Guittar shipping price', () => {
 
   [book, guittar, freezer].forEach((item) => order.addItem(item, 1));
 
-  expect(order.getShippingTotal(1000)).toBeCloseTo(440);
+  expect(order.getFreight()).toBe(440);
 });
