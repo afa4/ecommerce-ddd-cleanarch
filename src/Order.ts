@@ -14,7 +14,7 @@ export default class Order {
   }
 
   addItem(item: Item, quantity: number) {
-    this.orderItems.push(new OrderItem(item.id, item.price, quantity, item.volume.getVolume(), item.volume.getDensity()));
+    this.orderItems.push(new OrderItem(item.id, item.price, quantity, item.volume));
   }
 
   addCoupon(coupon: Coupon) {

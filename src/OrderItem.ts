@@ -1,3 +1,5 @@
+import ItemVolume from './ItemVolume';
+
 const MINIMUM_SHIPPING_TOTAL = 10;
 
 export default class OrderItem {
@@ -5,8 +7,7 @@ export default class OrderItem {
     public readonly itemId: string,
     public readonly price: number,
     public readonly quantity: number,
-    public readonly volume: number,
-    public readonly density: number,
+    public readonly itemVolume: ItemVolume,
   ) {}
 
   getTotal() {
@@ -14,7 +15,7 @@ export default class OrderItem {
   }
 
   getShippingTotal(distance: number) {
-    const shippingTotal = distance * this.volume * (this.density / 100) * this.quantity;
+    const shippingTotal = distance * this.itemVolume.getVolume() * (this.itemVolume.getDensity() / 100) * this.quantity;
     return (shippingTotal < MINIMUM_SHIPPING_TOTAL) ? MINIMUM_SHIPPING_TOTAL: shippingTotal;
   }
 }
