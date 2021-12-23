@@ -79,3 +79,17 @@ test('should calculate Book, Freezer and Guittar shipping price', () => {
 
   expect(order.getFreight()).toBe(440);
 });
+
+test('Given getCode is called, should throw error when order has not sequence', () => {
+  const order = new Order('935.411.347-80', new Date('2019-01-01'));
+
+  expect(() => order.getCode()).toThrow(new Error('Order has not sequence'));
+});
+
+test('should return order code', () => {
+  const order = new Order('935.411.347-80', new Date('2019-01-01'));
+
+  order.addSequence(1);
+
+  expect(order.getCode()).toBe('201900000001');
+});

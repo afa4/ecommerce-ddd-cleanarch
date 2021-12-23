@@ -6,6 +6,7 @@ import FreightCalculator from "./FreightCalculator";
 import DefaultFreightCalculator from "./DefaultFreightCalculator";
 
 export default class Order {
+  private sequence: number | undefined;
   private cpf: Cpf;
   private orderItems: OrderItem[];
   private coupon: Coupon | undefined;
@@ -31,6 +32,10 @@ export default class Order {
     this.coupon = coupon;
   }
 
+  addSequence(sequence: number) {
+    this.sequence = sequence;
+  }
+
   getTotal(): number {
     const total = this.orderItems.reduce(
       (total, orderItem) => total + orderItem.getTotal(),
@@ -41,5 +46,17 @@ export default class Order {
 
   getFreight(): number {
     return this.freight;
+  }
+
+  getCode(): string {
+    if(!this.sequence) throw new Error('Order has not sequence');
+
+    let sequenceString = '' + this.sequence;
+
+    while(sequenceString.length < 8) {
+      sequenceString = '0' + sequenceString;
+    }
+    
+    return this.createdAt.getUTCFullYear() + sequenceString;
   }
 }
