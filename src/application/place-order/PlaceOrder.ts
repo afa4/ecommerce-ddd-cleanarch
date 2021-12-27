@@ -22,7 +22,6 @@ export default class PlaceOrder {
       const item = itemsMappedById[orderItem.itemId];
       order.addItem(item, orderItem.quantity);
     });
-
     if(input.coupon) {
       const coupon = await this.couponRepository.findById(input.coupon);
       if(coupon) {

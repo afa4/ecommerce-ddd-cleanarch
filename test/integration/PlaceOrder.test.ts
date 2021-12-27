@@ -46,7 +46,7 @@ test('should place order from input with 3 items', async () => {
 
   const placeOrderOutput = await placeOrder.execute(placeOrderInput);
 
-  expect(placeOrderOutput.total).toBe(5050);
+  expect(placeOrderOutput.total).toBe(5520);
 });
 
 test('should place order and save it on repository', async () => {
@@ -122,5 +122,5 @@ test('should place order with coupon', async () => {
   };
 
   const output = await placeOrder.execute(placeOrderInput);
-  await expect(output.total).toBe(800);
+  await expect(output.total).toBe(1200); // total (800) + freight (400)
 });
