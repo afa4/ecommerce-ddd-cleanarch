@@ -1,20 +1,24 @@
-import PlaceOrder from '../../src/application/PlaceOrder';
+import PlaceOrder from '../../src/application/place-order/PlaceOrder';
 import Item from '../../src/domain/Item';
 import ItemVolume from '../../src/domain/ItemVolume';
 import Order from '../../src/domain/Order';
+import CouponRepository from '../../src/domain/repository/CouponRepository';
 import ItemRepository from '../../src/domain/repository/ItemRepository';
 import OrderRepository from '../../src/domain/repository/OrderRepository';
 import ItemMemoryRepository from '../../src/infra/repository/memory/ItemMemoryRepository';
 import OrderMemoryRepository from '../../src/infra/repository/memory/OrderMemoryRepository';
+import CouponMemoryRepository from '../../src/infra/repository/memory/CouponMemoryRepository';
 
 let placeOrder: PlaceOrder;
 let itemRepository: ItemRepository;
 let orderRepository: OrderRepository;
+let couponRepository: CouponRepository;
 
 beforeEach(() => {
   itemRepository = new ItemMemoryRepository();
   orderRepository = new OrderMemoryRepository();
-  placeOrder = new PlaceOrder(itemRepository, orderRepository);
+  couponRepository = new CouponMemoryRepository();
+  placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
 });
 
 test('should throw error while placing order with invalid cpf', async () => {
@@ -105,4 +109,18 @@ test('should throw error while placing order if only some items could be found',
   };
 
   await expect(() => placeOrder.execute(placeOrderInput)).rejects.toThrow('Item(s) not found');
+});
+
+test('should place order with coupon', async () => {
+  const placeOrderInput = {
+    cpf: '935.411.347-80',
+    orderItems: [
+      { itemId: 1, quantity: 1 },
+    ],
+    date: new Date('2021-12-27'),
+    coupon: "VALE20"
+  };
+
+  const output = await placeOrder.execute(placeOrderInput);
+  await expect(output.total).toBe(800);
 });

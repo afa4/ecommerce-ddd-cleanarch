@@ -1,7 +1,8 @@
-import Item from '../domain/Item';
-import Order from '../domain/Order';
-import ItemRepository from '../domain/repository/ItemRepository';
-import OrderRepository from '../domain/repository/OrderRepository';
+import Item from '../../domain/Item';
+import Order from '../../domain/Order';
+import ItemRepository from '../../domain/repository/ItemRepository';
+import OrderRepository from '../../domain/repository/OrderRepository';
+import CouponRepository from '../../domain/repository/CouponRepository';
 import PlaceOrderInput from './PlaceOrderInput';
 import PlaceOrderOutput from './PlaceOrderOutput';
 
@@ -10,6 +11,7 @@ export default class PlaceOrder {
   constructor(
     private readonly itemRepository: ItemRepository,
     private readonly orderRepository: OrderRepository,
+    private readonly couponRepository: CouponRepository
   ) {}
   
   async execute(input: PlaceOrderInput): Promise<PlaceOrderOutput> {
@@ -20,9 +22,18 @@ export default class PlaceOrder {
       const item = itemsMappedById[orderItem.itemId];
       order.addItem(item, orderItem.quantity);
     });
-    await this.orderRepository.save(order);
 
-    return Promise.resolve(new PlaceOrderOutput(order.getTotal()));
+    if(input.coupon) {
+      const coupon = await this.couponRepository.findById(input.coupon);
+      if(coupon) {
+        order.addCoupon(coupon);
+      }
+    }
+
+    await this.orderRepository.save(order);
+    const output = new PlaceOrderOutput(order.getTotal());
+
+    return Promise.resolve(output);
   }
 
   private async getItemsMappedById(itemIds: number[]): Promise<{ [id: number]: Item }> {
