@@ -37,11 +37,9 @@ export default class Order {
   }
 
   getTotal(): number {
-    const total = this.orderItems.reduce(
-      (total, orderItem) => total + orderItem.getTotal(),
-      0
-    );
-    return total - (this.coupon?.getDiscount(total, this.createdAt) ?? 0);
+    const total = this.orderItems.reduce((total, orderItem) => total + orderItem.getTotal(), 0);
+    const discount = this.coupon?.getDiscount(total, this.createdAt) ?? 0;
+    return total - discount;
   }
 
   getFreight(): number {
