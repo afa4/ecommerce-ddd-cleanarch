@@ -1,3 +1,4 @@
 export default class SimulateFreightInput {
-  constructor(readonly orderItems: { itemId: number, quantity: number }[]) {}
+  constructor(readonly orderItems: { itemId: number, quantity: number }[]) {
+  }
 }

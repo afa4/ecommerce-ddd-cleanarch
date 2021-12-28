@@ -2,25 +2,22 @@ import ItemRepository from '../../../domain/repository/ItemRepository';
 import UseCase from '../UseCase';
 import SimulateFreightInput from './SimulateFreightInput';
 import SimulateFreightOutput from './SimulateFreightOutput';
-import Order from '../../../domain/Order'
-
-const FAKE_VALID_CPF = '935.411.347-80';
+import FreightCalculator from "../../../domain/FreightCalculator";
 
 export default class SimulateFreight implements UseCase<SimulateFreightInput, SimulateFreightOutput> {
 
-  constructor(private readonly itemRepository: ItemRepository) {}
+  constructor(private readonly itemRepository: ItemRepository, private readonly freightCalculator: FreightCalculator) {}
 
   async execute(input: SimulateFreightInput): Promise<SimulateFreightOutput>
   {
-    const simulatedOrder = new Order(FAKE_VALID_CPF);
+    let freight = 0;
     const itemIds = input.orderItems.map((orderItem) => orderItem.itemId);
     const itemsMappedById = await this.itemRepository.getItemsMappedByIdWhereIdIn(itemIds);
     input.orderItems.forEach((orderItem) => {
       const item = itemsMappedById[orderItem.itemId];
-      simulatedOrder.addItem(item, orderItem.quantity);
+      freight += this.freightCalculator.calculate(item, orderItem.quantity)
     });
 
-    return Promise.resolve(new SimulateFreightOutput(simulatedOrder.getFreight()));
+    return Promise.resolve(new SimulateFreightOutput(freight));
   }
-  
 }

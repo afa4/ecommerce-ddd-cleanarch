@@ -1,13 +1,14 @@
 import SimulateFreight from "../../src/application/use-cases/simulate-freight/SimulateFreight";
 import ItemRepository from '../../src/domain/repository/ItemRepository';
 import ItemMemoryRepository from '../../src/infra/repository/memory/ItemMemoryRepository';
+import DefaultFreightCalculator from "../../src/domain/DefaultFreightCalculator";
 
 let simulateFreight: SimulateFreight;
 let itemRepository: ItemRepository;
 
 beforeEach(() => {
   itemRepository = new ItemMemoryRepository();
-  simulateFreight = new SimulateFreight(itemRepository);
+  simulateFreight = new SimulateFreight(itemRepository, new DefaultFreightCalculator());
 });
 
 test("should simulate freight with 3 items", async () => {
