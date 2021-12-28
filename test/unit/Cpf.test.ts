@@ -34,4 +34,3 @@ test.each([
 ])('should create cpf if input is valid cpf', (rawCpf) => {
   expect(new Cpf(rawCpf)).toBeTruthy();
 });
-

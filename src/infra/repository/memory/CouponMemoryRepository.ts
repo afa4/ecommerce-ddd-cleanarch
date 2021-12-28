@@ -15,5 +15,4 @@ export default class CouponMemoryRepository implements CouponRepository {
     }
     return Promise.resolve(undefined);
   }
-
 }

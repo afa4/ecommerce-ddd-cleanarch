@@ -9,5 +9,4 @@ export default class OrderMemoryRepository implements OrderRepository {
     this.orders.push(order);
     return Promise.resolve();
   }
-
 }

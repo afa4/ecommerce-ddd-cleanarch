@@ -11,5 +11,4 @@ export default class ValidateCoupon implements UseCase<string, boolean> {
     if(!coupon) return Promise.resolve(false);
     return Promise.resolve(coupon.isValid());
   }
-
 }
