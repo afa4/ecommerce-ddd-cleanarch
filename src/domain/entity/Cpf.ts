@@ -15,19 +15,19 @@ export default class Cpf {
     if (this.isBlocked(cpf)) return false;
 
     const firstNineDigits = cpf.substring(0, 9);
-    const firstVerifyer = this.calculateVerifyer(
+    const firstVerifier = this.calculateVerifier(
       firstNineDigits,
       FIRST_DIGIT_FACTOR
     );
-    const expectedFirstTenDigits = `${firstNineDigits}${firstVerifyer}`;
-    const secondVerifyer = this.calculateVerifyer(
+    const expectedFirstTenDigits = `${firstNineDigits}${firstVerifier}`;
+    const secondVerifier = this.calculateVerifier(
       expectedFirstTenDigits,
       SECOND_DIGIT_FACTOR
     );
-    const expectedVerifyers = `${firstVerifyer}${secondVerifyer}`;
-    const actualVerifyers = cpf.slice(9);
+    const expectedVerifiers = `${firstVerifier}${secondVerifier}`;
+    const actualVerifiers = cpf.slice(9);
 
-    return actualVerifyers === expectedVerifyers;
+    return actualVerifiers === expectedVerifiers;
   }
 
   private clean(cpf: string): string {
@@ -43,7 +43,7 @@ export default class Cpf {
     return [...cpf].every((digit) => digit === firstDigit);
   }
 
-  private calculateVerifyer(cpfDigits: string, factor: number): number {
+  private calculateVerifier(cpfDigits: string, factor: number): number {
     let digitsSum = 0;
     for (let i = 0; i < cpfDigits.length; i++) {
       const digit = parseInt(cpfDigits.substring(i, i + 1));
