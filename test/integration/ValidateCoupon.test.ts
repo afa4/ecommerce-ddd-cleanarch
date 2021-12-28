@@ -1,4 +1,4 @@
-import ValidateCoupon from '../../src/application/validate-coupon/ValidateCoupon'
+import ValidateCoupon from '../../src/application/use-cases/validate-coupon/ValidateCoupon'
 import CouponRepository from '../../src/domain/repository/CouponRepository';
 import CouponMemoryRepository from '../../src/infra/repository/memory/CouponMemoryRepository';
 

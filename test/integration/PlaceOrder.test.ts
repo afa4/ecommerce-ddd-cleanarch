@@ -1,4 +1,4 @@
-import PlaceOrder from '../../src/application/place-order/PlaceOrder';
+import PlaceOrder from '../../src/application/use-cases/place-order/PlaceOrder';
 import Item from '../../src/domain/Item';
 import ItemVolume from '../../src/domain/ItemVolume';
 import Order from '../../src/domain/Order';

@@ -1,8 +1,8 @@
-import ItemRepository from '../../domain/repository/ItemRepository';
+import ItemRepository from '../../../domain/repository/ItemRepository';
 import UseCase from '../UseCase';
 import SimulateFreightInput from './SimulateFreightInput';
 import SimulateFreightOutput from './SimulateFreightOutput';
-import Order from '../../domain/Order'
+import Order from '../../../domain/Order'
 
 const FAKE_VALID_CPF = '935.411.347-80';
 

@@ -1,4 +1,4 @@
-import CouponRepository from '../../domain/repository/CouponRepository';
+import CouponRepository from '../../../domain/repository/CouponRepository';
 import UseCase from '../UseCase';
 
 export default class ValidateCoupon implements UseCase<string, boolean> {

@@ -1,4 +1,4 @@
-import SimulateFreight from "../../src/application/simulate-freight/SimulateFreight";
+import SimulateFreight from "../../src/application/use-cases/simulate-freight/SimulateFreight";
 import ItemRepository from '../../src/domain/repository/ItemRepository';
 import ItemMemoryRepository from '../../src/infra/repository/memory/ItemMemoryRepository';
 
