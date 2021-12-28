@@ -1,8 +1,8 @@
-import Coupon from '../../src/domain/Coupon';
-import Item from '../../src/domain/Item';
-import ItemVolume from '../../src/domain/ItemVolume';
-import Order from '../../src/domain/Order';
-import NoFreightCalculator from '../../src/domain/NoFreightCalculator';
+import Coupon from '../../src/domain/entity/Coupon';
+import Item from '../../src/domain/entity/Item';
+import ItemVolume from '../../src/domain/entity/ItemVolume';
+import Order from '../../src/domain/entity/Order';
+import NoFreightCalculator from '../../src/domain/entity/NoFreightCalculator';
 
 let order: Order;
 const DUMMY_ITEM_VOLUME = new ItemVolume();

@@ -1,4 +1,4 @@
-import Order from '../../../domain/Order';
+import Order from '../../../domain/entity/Order';
 import OrderRepository from '../../../domain/repository/OrderRepository';
 
 export default class OrderMemoryRepository implements OrderRepository {
