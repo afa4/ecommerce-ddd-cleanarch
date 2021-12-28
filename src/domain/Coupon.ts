@@ -17,6 +17,10 @@ export default class Coupon {
     if(!this.expiration) {
       return false;
     }
-    return this.expiration.getTime() < referenceDate.getTime(); // TODO: inverter a dependencia da data
+    return this.expiration.getTime() < referenceDate.getTime();
+  }
+
+  isValid(referenceDate: Date = new Date()): boolean {
+    return !this.isExpired(referenceDate);
   }
 }
