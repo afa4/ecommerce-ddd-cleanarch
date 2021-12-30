@@ -1,12 +1,15 @@
 import ValidateCoupon from '../../src/application/use-cases/validate-coupon/ValidateCoupon'
 import CouponRepository from '../../src/domain/repository/CouponRepository';
-import CouponMemoryRepository from '../../src/infra/repository/memory/CouponMemoryRepository';
+import TestConnectionInstance from "./TestConnectionInstance";
+import CouponDatabaseRepository from "../../src/infra/repository/database/CouponDatabaseRepository";
+import Connection from "../../src/infra/repository/database/Connection";
 
 let validateCoupon: ValidateCoupon;
 let couponRepository: CouponRepository;
+let connection: Connection = TestConnectionInstance();
 
 beforeEach(() => {
-  couponRepository = new CouponMemoryRepository();
+  couponRepository = new CouponDatabaseRepository(connection);
   validateCoupon = new ValidateCoupon(couponRepository);
 });
 
@@ -24,7 +27,11 @@ test('should return true when coupon is not expired', async () => {
 });
 
 test('should return false when coupon is expired', async () => {
-  const couponCode = 'VALE10';
+  const couponCode = 'VALE20_EXPIRED';
   const isValid = await validateCoupon.execute(couponCode);
   expect(isValid).toBeFalsy();
 });
+
+afterAll(async () => {
+  await connection.disconnect();
+})
