@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && jest ./dist/test",
+    "test": "tsc && jest ./dist/test/unit",
+    "test:integration": "tsc && npm run infra && jest ./dist/test/integration && npm run infra:down",
     "coverage": "tsc && jest ./dist/test --coverage",
     "infra": "docker-compose up -d",
     "infra:down": "docker-compose down -v"
