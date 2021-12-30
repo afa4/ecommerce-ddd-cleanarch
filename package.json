@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "tsc && jest ./dist/test",
-    "coverage": "tsc && jest ./dist/test --coverage"
+    "coverage": "tsc && jest ./dist/test --coverage",
+    "infra" : "docker-compose up -d",
+    "infra:down" : "docker-compose down -v"
   },
   "author": "",
   "license": "ISC",
