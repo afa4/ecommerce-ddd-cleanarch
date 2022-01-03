@@ -101,7 +101,7 @@ test('getCode should throw error when order has not sequence', () => {
 test('getCode should return order code', () => {
   const order = new Order('935.411.347-80', new Date('2019-01-01'));
 
-  order.addSequence(1);
+  order.setSequence(1);
 
   expect(order.getCode()).toBe('201900000001');
 });

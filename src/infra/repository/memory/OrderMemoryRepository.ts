@@ -1,13 +1,9 @@
 import Order from '../../../domain/entity/Order';
 import OrderRepository from '../../../domain/repository/OrderRepository';
 
-const FIRST_ORDER = new Order('935.411.347-80', new Date('2021-01-01'));
-FIRST_ORDER.addSequence(1);
-
 export default class OrderMemoryRepository implements OrderRepository {
-  private orders: Order[] = [
-    FIRST_ORDER
-  ];
+  private sequence = 0;
+  private orders: Order[] = [];
 
   findByCode(code: string): Promise<Order | undefined> {
     const result = this.orders.find((order) => {
@@ -24,5 +20,9 @@ export default class OrderMemoryRepository implements OrderRepository {
 
   findAll(): Promise<Order[]> {
     return Promise.resolve(this.orders);
+  }
+
+  getSequence(): Promise<number> {
+    return Promise.resolve(++this.sequence);
   }
 }

@@ -13,9 +13,10 @@ export default class PlaceOrder implements UseCase<PlaceOrderInput, PlaceOrderOu
     private readonly orderRepository: OrderRepository,
     private readonly couponRepository: CouponRepository
   ) {}
-  
+
   async execute(input: PlaceOrderInput): Promise<PlaceOrderOutput> {
     const order = new Order(input.cpf, input.date);
+    order.setSequence(await this.orderRepository.getSequence());
     const itemIds = input.orderItems.map((orderItem) => orderItem.itemId);
     const itemsMappedById = await this.itemRepository.getItemsMappedByIdWhereIdIn(itemIds); // single call to db
     input.orderItems.forEach((orderItem) => {

@@ -1,10 +1,18 @@
 import FindOrderByCode from "../../src/application/use-cases/find-order-by-code/FindOrderByCode";
 import OrderMemoryRepository from "../../src/infra/repository/memory/OrderMemoryRepository";
+import OrderRepository from "../../src/domain/repository/OrderRepository";
+import Order from "../../src/domain/entity/Order";
 
 let findOrderByCode: FindOrderByCode;
+let orderRepository: OrderRepository;
 
-beforeEach(() => {
-    findOrderByCode = new FindOrderByCode(new OrderMemoryRepository());
+beforeEach(async () => {
+    orderRepository = new OrderMemoryRepository();
+    findOrderByCode = new FindOrderByCode(orderRepository);
+
+    const order = new Order('935.411.347-80', new Date('2021-01-01'));
+    order.setSequence(await orderRepository.getSequence());
+    await orderRepository.save(order);
 });
 
 test('should find order by code', async () => {
