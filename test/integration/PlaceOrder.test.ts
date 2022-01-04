@@ -5,21 +5,28 @@ import Order from '../../src/domain/entity/Order';
 import CouponRepository from '../../src/domain/repository/CouponRepository';
 import ItemRepository from '../../src/domain/repository/ItemRepository';
 import OrderRepository from '../../src/domain/repository/OrderRepository';
-import ItemMemoryRepository from '../../src/infra/repository/memory/ItemMemoryRepository';
 import OrderMemoryRepository from '../../src/infra/repository/memory/OrderMemoryRepository';
 import CouponMemoryRepository from '../../src/infra/repository/memory/CouponMemoryRepository';
+import ItemDatabaseRepository from "../../src/infra/repository/database/ItemDatabaseRepository";
+import TestConnectionInstance from "./TestConnectionInstance";
+import PgPromiseConnectionAdapter from "../../src/infra/database/PgPromiseConnectionAdapter";
 
 let placeOrder: PlaceOrder;
 let itemRepository: ItemRepository;
 let orderRepository: OrderRepository;
 let couponRepository: CouponRepository;
+let connection: PgPromiseConnectionAdapter = TestConnectionInstance();
 
 beforeEach(() => {
-  itemRepository = new ItemMemoryRepository();
+  itemRepository = new ItemDatabaseRepository(connection);
   orderRepository = new OrderMemoryRepository();
   couponRepository = new CouponMemoryRepository();
   placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
 });
+
+afterAll(async () => {
+  await connection.disconnect();
+})
 
 test('should throw error while placing order with invalid cpf', async () => {
   const placeOrderInput = {
