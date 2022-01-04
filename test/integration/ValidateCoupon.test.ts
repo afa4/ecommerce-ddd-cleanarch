@@ -2,7 +2,7 @@ import ValidateCoupon from '../../src/application/use-cases/validate-coupon/Vali
 import CouponRepository from '../../src/domain/repository/CouponRepository';
 import TestConnectionInstance from "./TestConnectionInstance";
 import CouponDatabaseRepository from "../../src/infra/repository/database/CouponDatabaseRepository";
-import Connection from "../../src/infra/repository/database/Connection";
+import Connection from "../../src/infra/database/Connection";
 
 let validateCoupon: ValidateCoupon;
 let couponRepository: CouponRepository;

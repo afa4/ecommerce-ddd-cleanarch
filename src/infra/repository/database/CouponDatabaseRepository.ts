@@ -1,6 +1,6 @@
 import CouponRepository from "../../../domain/repository/CouponRepository";
 import Coupon from "../../../domain/entity/Coupon";
-import Connection from "./Connection";
+import Connection from "../../database/Connection";
 
 export default class CouponDatabaseRepository implements CouponRepository {
     constructor(private readonly connection: Connection) {}
