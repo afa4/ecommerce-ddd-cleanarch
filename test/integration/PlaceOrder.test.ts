@@ -8,14 +8,13 @@ import OrderRepository from '../../src/domain/repository/OrderRepository';
 import OrderMemoryRepository from '../../src/infra/repository/memory/OrderMemoryRepository';
 import CouponMemoryRepository from '../../src/infra/repository/memory/CouponMemoryRepository';
 import ItemDatabaseRepository from "../../src/infra/repository/database/ItemDatabaseRepository";
-import TestConnectionInstance from "./TestConnectionInstance";
 import PgPromiseConnectionAdapter from "../../src/infra/database/PgPromiseConnectionAdapter";
 
 let placeOrder: PlaceOrder;
 let itemRepository: ItemRepository;
 let orderRepository: OrderRepository;
 let couponRepository: CouponRepository;
-let connection: PgPromiseConnectionAdapter = TestConnectionInstance();
+const connection = new PgPromiseConnectionAdapter('postgres://dbuser:dbpass@localhost:5432/app');
 
 beforeEach(() => {
   itemRepository = new ItemDatabaseRepository(connection);
@@ -66,13 +65,13 @@ test('should place order and save it on repository', async () => {
     ],
     date: createdAt
   };
-
   await placeOrder.execute(placeOrderInput);
 
   const expectedOrder = new Order('935.411.347-80', createdAt);
   expectedOrder.setSequence(1);
   expectedOrder.addItem(new Item('1', 'Freezer', 1000, new ItemVolume(200, 100, 50, 40)), 1);
-  expect(orderRepositorySpy).toBeCalledWith(expectedOrder);
+
+  expect(orderRepositorySpy).toBeCalledWith(expectedOrder); //problemas com referencia de memória (usar deepequal)
 });
 
 test('should place order getting items from repository', async () => {

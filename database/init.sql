@@ -13,17 +13,11 @@ create table ccca.item
 );
 
 insert into ccca.item (id_item, category, description, price, width, height, length, weight)
-values (1, 'Música', 'CD', 30, 30, 30, 10, 0.5);
+values (1, 'Eletrodomésticos', 'Freezer', 1000, 200, 100, 50, 40);
 insert into ccca.item (id_item, category, description, price, width, height, length, weight)
-values (2, 'Vídeo', 'DVD', 50, 40, 20, 10, 0.5);
+values (2, 'Instrumentos Musicais', 'Guittar', 2000, 100, 30, 10, 3);
 insert into ccca.item (id_item, category, description, price, width, height, length, weight)
-values (3, 'Vídeo', 'VHS', 10, 40, 20, 10, 0.5);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight)
-values (4, 'Instrumentos Musicais', 'Guitarra', 1000, 100, 30, 10, 3);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight)
-values (5, 'Instrumentos Musicais', 'Amplificador', 5000, 100, 50, 50, 20);
-insert into ccca.item (id_item, category, description, price, width, height, length, weight)
-values (6, 'Acessórios', 'Cabo', 30, 10, 10, 10, 0.9);
+values (3, 'Livraria', 'Book', 50, 20, 15, 10, 1);
 
 create table ccca.coupon
 (

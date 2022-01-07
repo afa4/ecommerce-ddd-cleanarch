@@ -1,12 +1,12 @@
 import ValidateCoupon from '../../src/application/use-cases/validate-coupon/ValidateCoupon'
 import CouponRepository from '../../src/domain/repository/CouponRepository';
-import TestConnectionInstance from "./TestConnectionInstance";
 import CouponDatabaseRepository from "../../src/infra/repository/database/CouponDatabaseRepository";
 import Connection from "../../src/infra/database/Connection";
+import PgPromiseConnectionAdapter from "../../src/infra/database/PgPromiseConnectionAdapter";
 
 let validateCoupon: ValidateCoupon;
 let couponRepository: CouponRepository;
-let connection: Connection = TestConnectionInstance();
+let connection: Connection = new PgPromiseConnectionAdapter('postgres://dbuser:dbpass@localhost:5432/app');
 
 beforeEach(() => {
   couponRepository = new CouponDatabaseRepository(connection);
