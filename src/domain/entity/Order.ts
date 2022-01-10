@@ -4,12 +4,13 @@ import Item from "./Item";
 import OrderItem from "./OrderItem";
 import FreightCalculator from "./FreightCalculator";
 import DefaultFreightCalculator from "./DefaultFreightCalculator";
+import OrderCode from "./OrderCode";
 
 export default class Order {
   private sequence: number | undefined;
-  private code: string | undefined;
+  private orderCode: OrderCode | undefined;
   private cpf: Cpf;
-  private orderItems: OrderItem[];
+  private readonly orderItems: OrderItem[];
   private coupon: Coupon | undefined;
   private freight: number;
 
@@ -35,7 +36,7 @@ export default class Order {
 
   setSequence(sequence: number) {
     this.sequence = sequence;
-    this.setCode();
+    this.orderCode = new OrderCode(this.sequence, this.createdAt);
   }
 
   getTotal(): number {
@@ -49,16 +50,19 @@ export default class Order {
   }
 
   getCode(): string {
-    if(!this.code) throw new Error('Order has not sequence');
-    return this.code;
+    if(!this.orderCode) throw new Error('Order doesnt have code');
+    return this.orderCode.value;
   }
 
-  private setCode() {
-    if(!this.sequence) throw new Error('Order has not sequence');
-    let sequenceString = '' + this.sequence;
-    while(sequenceString.length < 8) {
-      sequenceString = '0' + sequenceString;
-    }
-    this.code = this.createdAt.getUTCFullYear() + sequenceString;
+  getCoupon(): string | undefined {
+    return this.coupon?.id;
+  }
+
+  getCpf(): string {
+    return this.cpf.value;
+  }
+
+  getItems(): OrderItem[] {
+    return this.orderItems;
   }
 }

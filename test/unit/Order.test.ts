@@ -92,10 +92,10 @@ test('should calculate Book, Freezer and Guittar freight (default)', () => {
   expect(order.getFreight()).toBe(440);
 });
 
-test('getCode should throw error when order has not sequence', () => {
+test('getCode should throw error when code is undefined', () => {
   const order = new Order('935.411.347-80', new Date('2019-01-01'));
 
-  expect(() => order.getCode()).toThrow(new Error('Order has not sequence'));
+  expect(() => order.getCode()).toThrow(new Error('Order doesnt have code'));
 });
 
 test('getCode should return order code', () => {
