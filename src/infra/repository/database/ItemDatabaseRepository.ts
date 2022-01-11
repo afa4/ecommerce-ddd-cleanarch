@@ -17,7 +17,7 @@ export default class ItemDatabaseRepository extends ItemAbstractRepository {
         const items = itemsData.map((itemData: any) => {
             //id_item, category, description, price, width, height, length, weight
             const itemVolume = new ItemVolume(itemData.height, itemData.width, itemData.length, itemData.weight);
-            return new Item(itemData.id_item.toString(), itemData.description, parseInt(itemData.price), itemVolume);
+            return new Item(itemData.id_item.toString(), itemData.description, Number(itemData.price), itemVolume);
         });
         return Promise.resolve(items);
     }
