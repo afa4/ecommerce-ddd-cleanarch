@@ -17,8 +17,15 @@ export default class ItemDatabaseRepository extends ItemAbstractRepository {
         const items = itemsData.map((itemData: any) => {
             //id_item, category, description, price, width, height, length, weight
             const itemVolume = new ItemVolume(itemData.height, itemData.width, itemData.length, itemData.weight);
-            return new Item(itemData.id_item.toString(), itemData.description, Number(itemData.price), itemVolume);
+            return new Item(itemData.id_item, itemData.description, Number(itemData.price), itemVolume);
         });
         return Promise.resolve(items);
+    }
+
+    async findById(id: number): Promise<Item> {
+        const query = "select * from ccca.item where id_item = $1"
+        const [itemData] = await this.connection.query(query, [id]);
+        const itemVolume = new ItemVolume(itemData.height, itemData.width, itemData.length, itemData.weight);
+        return new Item(itemData.id_item, itemData.description, Number(itemData.price), itemVolume);
     }
 }

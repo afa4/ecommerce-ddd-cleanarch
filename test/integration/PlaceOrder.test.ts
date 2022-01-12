@@ -69,9 +69,9 @@ test('should place order and save it on repository', async () => {
 
   const expectedOrder = new Order('935.411.347-80', createdAt);
   expectedOrder.setSequence(1);
-  expectedOrder.addItem(new Item('1', 'Freezer', 1000, new ItemVolume(200, 100, 50, 40)), 1);
+  expectedOrder.addItem(new Item(1, 'Freezer', 1000, new ItemVolume(200, 100, 50, 40)), 1);
 
-  expect(orderRepositorySpy).toBeCalledWith(expectedOrder); //problemas com referencia de memória (usar deepequal)
+  expect(orderRepositorySpy).toBeCalledWith(expectedOrder); // problemas com referencia de memória (usar deepequal)
 });
 
 test('should place order getting items from repository', async () => {

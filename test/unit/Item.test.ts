@@ -3,7 +3,7 @@ import ItemVolume from '../../src/domain/entity/ItemVolume';
 
 test('should create item', () => {
   const volume = new ItemVolume(20, 15, 10, 1);
-  expect(new Item("1", "Camera", 50, volume)).toBeTruthy();
+  expect(new Item(1, "Camera", 50, volume)).toBeTruthy();
 });
 
 test('should calculate volume in m3 based on dimensions', () => {
