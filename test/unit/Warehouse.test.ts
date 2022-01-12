@@ -4,7 +4,7 @@ import ItemVolume from "../../src/domain/entity/ItemVolume";
 import WarehouseEvent from "../../src/domain/entity/WarehouseEvent";
 import {WarehouseEventType} from "../../src/domain/entity/WarehouseEventType";
 
-const ITEM = new Item('1', 'Freezer', 1000, new ItemVolume(200, 100, 50, 40));
+const ITEM = new Item(1, 'Freezer', 1000, new ItemVolume(200, 100, 50, 40));
 
 test('should create item stock', () => {
     const warehouse = new Warehouse(ITEM);

@@ -4,7 +4,7 @@ import Item from "./Item";
 
 export default class Warehouse {
     private quantity: number;
-    private readonly itemId: string;
+    private readonly itemId: number;
 
     constructor(item: Item) {
         this.itemId = item.id;
