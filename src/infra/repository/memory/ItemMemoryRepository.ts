@@ -1,5 +1,5 @@
-import Item from '../../../domain/entity/Item';
-import ItemVolume from '../../../domain/entity/ItemVolume';
+import Item from '../../../domain/entity/item/Item';
+import ItemVolume from '../../../domain/entity/item/ItemVolume';
 import ItemAbstractRepository from "../../../domain/repository/ItemAbstractRepository";
 
 export default class ItemMemoryRepository extends ItemAbstractRepository {

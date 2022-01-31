@@ -2,7 +2,7 @@ import ItemRepository from '../../../domain/repository/ItemRepository';
 import UseCase from '../UseCase';
 import SimulateFreightInput from './SimulateFreightInput';
 import SimulateFreightOutput from './SimulateFreightOutput';
-import FreightCalculator from "../../../domain/entity/FreightCalculator";
+import FreightCalculator from "../../../domain/entity/freight/FreightCalculator";
 
 export default class SimulateFreight implements UseCase<SimulateFreightInput, SimulateFreightOutput> {
 

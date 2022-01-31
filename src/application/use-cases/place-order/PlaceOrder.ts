@@ -1,4 +1,4 @@
-import Order from '../../../domain/entity/Order';
+import Order from '../../../domain/entity/order/Order';
 import CouponRepository from '../../../domain/repository/CouponRepository';
 import ItemRepository from '../../../domain/repository/ItemRepository';
 import OrderRepository from '../../../domain/repository/OrderRepository';

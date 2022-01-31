@@ -1,5 +1,5 @@
 import OrderRepository from "../../../domain/repository/OrderRepository";
-import Order from "../../../domain/entity/Order";
+import Order from "../../../domain/entity/order/Order";
 import Connection from "../../database/Connection";
 
 export default class OrderDatabaseRepository implements OrderRepository {

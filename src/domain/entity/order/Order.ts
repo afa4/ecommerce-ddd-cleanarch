@@ -1,9 +1,9 @@
-import Coupon from "./Coupon";
+import Coupon from "../coupon/Coupon";
 import Cpf from "./Cpf";
-import Item from "./Item";
+import Item from "../item/Item";
 import OrderItem from "./OrderItem";
-import FreightCalculator from "./FreightCalculator";
-import DefaultFreightCalculator from "./DefaultFreightCalculator";
+import FreightCalculator from "../freight/FreightCalculator";
+import DefaultFreightCalculator from "../freight/DefaultFreightCalculator";
 import OrderCode from "./OrderCode";
 
 export default class Order {

@@ -1,7 +1,7 @@
-import Item from "../../src/domain/entity/Item";
-import ItemVolume from "../../src/domain/entity/ItemVolume";
-import WarehouseEvent from "../../src/domain/entity/WarehouseEvent";
-import {WarehouseEventType} from "../../src/domain/entity/WarehouseEventType";
+import Item from "../../src/domain/entity/item/Item";
+import ItemVolume from "../../src/domain/entity/item/ItemVolume";
+import WarehouseEvent from "../../src/domain/entity/warehouse/WarehouseEvent";
+import {WarehouseEventType} from "../../src/domain/entity/warehouse/WarehouseEventType";
 
 test('should create a stock unit', () => {
     const item = new Item(1, 'Freezer', 1000, new ItemVolume(200, 100, 50, 40));

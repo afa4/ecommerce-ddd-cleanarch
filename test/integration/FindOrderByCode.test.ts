@@ -1,7 +1,7 @@
 import FindOrderByCode from "../../src/application/use-cases/find-order-by-code/FindOrderByCode";
 import OrderMemoryRepository from "../../src/infra/repository/memory/OrderMemoryRepository";
 import OrderRepository from "../../src/domain/repository/OrderRepository";
-import Order from "../../src/domain/entity/Order";
+import Order from "../../src/domain/entity/order/Order";
 
 let findOrderByCode: FindOrderByCode;
 let orderRepository: OrderRepository;

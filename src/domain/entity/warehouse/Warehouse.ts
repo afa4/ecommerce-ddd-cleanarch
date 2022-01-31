@@ -1,6 +1,6 @@
 import WarehouseEvent from "./WarehouseEvent";
 import {WarehouseEventType} from "./WarehouseEventType";
-import Item from "./Item";
+import Item from "../item/Item";
 
 export default class Warehouse {
     private quantity: number;

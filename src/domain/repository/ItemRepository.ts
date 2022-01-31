@@ -1,4 +1,4 @@
-import Item from '../entity/Item';
+import Item from '../entity/item/Item';
 
 export default interface ItemRepository {
   findById(id: number): Promise<Item>;

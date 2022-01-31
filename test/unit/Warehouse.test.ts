@@ -1,8 +1,8 @@
-import Warehouse from "../../src/domain/entity/Warehouse";
-import Item from "../../src/domain/entity/Item";
-import ItemVolume from "../../src/domain/entity/ItemVolume";
-import WarehouseEvent from "../../src/domain/entity/WarehouseEvent";
-import {WarehouseEventType} from "../../src/domain/entity/WarehouseEventType";
+import Warehouse from "../../src/domain/entity/warehouse/Warehouse";
+import Item from "../../src/domain/entity/item/Item";
+import ItemVolume from "../../src/domain/entity/item/ItemVolume";
+import WarehouseEvent from "../../src/domain/entity/warehouse/WarehouseEvent";
+import {WarehouseEventType} from "../../src/domain/entity/warehouse/WarehouseEventType";
 
 const ITEM = new Item(1, 'Freezer', 1000, new ItemVolume(200, 100, 50, 40));
 

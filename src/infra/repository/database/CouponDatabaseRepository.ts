@@ -1,5 +1,5 @@
 import CouponRepository from "../../../domain/repository/CouponRepository";
-import Coupon from "../../../domain/entity/Coupon";
+import Coupon from "../../../domain/entity/coupon/Coupon";
 import Connection from "../../database/Connection";
 
 export default class CouponDatabaseRepository implements CouponRepository {

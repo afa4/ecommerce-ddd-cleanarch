@@ -1,4 +1,4 @@
-import Coupon from '../entity/Coupon';
+import Coupon from '../entity/coupon/Coupon';
 
 export default interface CouponRepository {
   findById(id: string): Promise<Coupon | undefined>;

@@ -1,11 +1,11 @@
 import UseCase from "../UseCase";
 import ProcessWarehouseEventInput from "./ProcessWarehouseEventInput";
 import WarehouseEventRepository from "../../../domain/repository/WarehouseEventRepository";
-import Warehouse from "../../../domain/entity/Warehouse";
+import Warehouse from "../../../domain/entity/warehouse/Warehouse";
 import ItemRepository from "../../../domain/repository/ItemRepository";
-import WarehouseEvent from "../../../domain/entity/WarehouseEvent";
-import Item from "../../../domain/entity/Item";
-import {WarehouseEventType, warehouseEventTypeFromString} from "../../../domain/entity/WarehouseEventType";
+import WarehouseEvent from "../../../domain/entity/warehouse/WarehouseEvent";
+import Item from "../../../domain/entity/item/Item";
+import {WarehouseEventType, warehouseEventTypeFromString} from "../../../domain/entity/warehouse/WarehouseEventType";
 
 export default class ProcessWarehouseEvent implements UseCase<ProcessWarehouseEventInput, void> {
 

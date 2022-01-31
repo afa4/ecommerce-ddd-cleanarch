@@ -1,4 +1,4 @@
-import Item from "../entity/Item";
+import Item from "../entity/item/Item";
 import ItemRepository from "./ItemRepository";
 
 export default abstract class ItemAbstractRepository implements ItemRepository {

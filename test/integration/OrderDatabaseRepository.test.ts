@@ -1,9 +1,9 @@
 import OrderRepository from "../../src/domain/repository/OrderRepository";
 import PgPromiseConnectionAdapter from "../../src/infra/database/PgPromiseConnectionAdapter";
 import OrderDatabaseRepository from "../../src/infra/repository/database/OrderDatabaseRepository";
-import Order from "../../src/domain/entity/Order";
-import Item from "../../src/domain/entity/Item";
-import ItemVolume from "../../src/domain/entity/ItemVolume";
+import Order from "../../src/domain/entity/order/Order";
+import Item from "../../src/domain/entity/item/Item";
+import ItemVolume from "../../src/domain/entity/item/ItemVolume";
 
 let orderRepository: OrderRepository;
 const connection = new PgPromiseConnectionAdapter('postgres://dbuser:dbpass@localhost:5432/app');

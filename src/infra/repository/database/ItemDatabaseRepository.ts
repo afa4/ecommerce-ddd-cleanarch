@@ -1,7 +1,7 @@
 import ItemAbstractRepository from "../../../domain/repository/ItemAbstractRepository";
-import Item from "../../../domain/entity/Item";
+import Item from "../../../domain/entity/item/Item";
 import Connection from '../../database/Connection';
-import ItemVolume from "../../../domain/entity/ItemVolume";
+import ItemVolume from "../../../domain/entity/item/ItemVolume";
 
 export default class ItemDatabaseRepository extends ItemAbstractRepository {
 
