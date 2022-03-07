@@ -11,8 +11,6 @@ export default class WarehouseEventDatabaseRepository implements WarehouseEventR
   async findByItemId(itemId: number): Promise<WarehouseEvent[]>
   {
     const warehouseEventsData = await this.connection.query("select * from ccca.warehouse_event where id_item = $1", [itemId]);
-    return warehouseEventsData.map((warehouseEventData) => {
-      // TODO: map database data to object
-    });
+    return Promise.resolve([]);
   }
 }
