@@ -52,3 +52,12 @@ create table ccca.order_item
     quantity integer,
     primary key (id_order, id_item)
 );
+
+create table ccca.warehouse_event
+(
+    id_warehouse_event serial,
+    id_item  integer,
+    quantity integer,
+    event_type text,
+    primary key (id_warehouse_event)
+);

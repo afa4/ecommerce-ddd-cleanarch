@@ -1,5 +1,5 @@
 import UseCase from "../UseCase";
-import ProcessWarehouseEventInput from "./ProcessWarehouseEventInput";
+import PlaceWarehouseEventInput from "./PlaceWarehouseEventInput";
 import WarehouseEventRepository from "../../../domain/repository/WarehouseEventRepository";
 import Warehouse from "../../../domain/entity/warehouse/Warehouse";
 import ItemRepository from "../../../domain/repository/ItemRepository";
@@ -7,13 +7,13 @@ import WarehouseEvent from "../../../domain/entity/warehouse/WarehouseEvent";
 import Item from "../../../domain/entity/item/Item";
 import {WarehouseEventType, warehouseEventTypeFromString} from "../../../domain/entity/warehouse/WarehouseEventType";
 
-export default class ProcessWarehouseEvent implements UseCase<ProcessWarehouseEventInput, void> {
+export default class PlaceWarehouseEvent implements UseCase<PlaceWarehouseEventInput, void> {
 
     constructor(private readonly itemRepository: ItemRepository,
                 private readonly warehouseEventRepository: WarehouseEventRepository) {
     }
 
-    async execute(input: ProcessWarehouseEventInput): Promise<void> {
+    async execute(input: PlaceWarehouseEventInput): Promise<void> {
         const eventType = warehouseEventTypeFromString(input.eventType);
         const item = await this.itemRepository.findById(input.itemId);
         const warehouse = await this.getWarehouse(item);

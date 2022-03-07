@@ -7,8 +7,8 @@
     "test": "tsc && jest ./dist/test",
     "test:unit": "tsc && jest ./dist/test/unit",
     "coverage": "tsc && jest ./dist/test --coverage",
-    "infra": "docker-compose up -d",
-    "infra:down": "docker-compose down -v"
+    "up": "docker-compose up -d",
+    "down": "docker-compose down -v"
   },
   "author": "",
   "license": "ISC",

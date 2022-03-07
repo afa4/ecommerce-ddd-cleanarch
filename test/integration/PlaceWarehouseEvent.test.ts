@@ -1,20 +1,20 @@
-import ProcessWarehouseEvent from "../../src/application/use-cases/process-warehouse-event/ProcessWarehouseEvent";
+import PlaceWarehouseEvent from "../../src/application/use-cases/place-warehouse-event/PlaceWarehouseEvent";
 import WarehouseEventMemoryRepository from "../../src/infra/repository/memory/WarehouseEventMemoryRepository";
 import ItemMemoryRepository from "../../src/infra/repository/memory/ItemMemoryRepository";
 
-let processWarehouseEvent: ProcessWarehouseEvent;
+let placeWarehouseEvent: PlaceWarehouseEvent;
 
 beforeEach(() => {
-    processWarehouseEvent = new ProcessWarehouseEvent(new ItemMemoryRepository(), new WarehouseEventMemoryRepository());
+    placeWarehouseEvent = new PlaceWarehouseEvent(new ItemMemoryRepository(), new WarehouseEventMemoryRepository());
 });
 
-test('should process warehouse event', async () => {
+test('should place warehouse event', async () => {
     const input = {
         itemId: 1,
         quantity: 10,
         eventType: 'ITEM_IN'
     }
-    await processWarehouseEvent.execute(input);
+    await placeWarehouseEvent.execute(input);
 });
 
 test('should throw error in ITEM_OUT event where warehouse is empty', async () => {
@@ -23,5 +23,5 @@ test('should throw error in ITEM_OUT event where warehouse is empty', async () =
         quantity: 10,
         eventType: 'ITEM_OUT'
     }
-    await expect(processWarehouseEvent.execute(input)).rejects.toThrow('Out of stock');
+    await expect(placeWarehouseEvent.execute(input)).rejects.toThrow('Out of stock');
 });

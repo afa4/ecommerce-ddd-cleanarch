@@ -3,7 +3,7 @@ export enum WarehouseEventType{
     ITEM_OUT = "ITEM_OUT"
 }
 
-export function warehouseEventTypeFromString(eventType: string) {
+export function warehouseEventTypeFromString(eventType: string): WarehouseEventType {
     switch (eventType) {
         case 'ITEM_IN':
             return WarehouseEventType.ITEM_IN
