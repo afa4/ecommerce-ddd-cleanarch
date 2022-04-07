@@ -2,7 +2,7 @@ import Coupon from '../../src/domain/entity/coupon/Coupon';
 import Item from '../../src/domain/entity/item/Item';
 import ItemVolume from '../../src/domain/entity/item/ItemVolume';
 import Order from '../../src/domain/entity/order/Order';
-import NoFreightCalculator from '../../src/domain/entity/freight/NoFreightCalculator';
+import NoFreightCalculator from '../../src/domain/services/freight/NoFreightCalculator';
 
 let order: Order;
 const DUMMY_ITEM_VOLUME = new ItemVolume();

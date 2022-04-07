@@ -1,5 +1,5 @@
 import FreightCalculator from './FreightCalculator';
-import Item from '../item/Item';
+import Item from '../../entity/item/Item';
 
 
 export default class NoFreightCalculator implements FreightCalculator {
