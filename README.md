@@ -4,7 +4,27 @@ Projeto cujo objetivo é aplicar boas práticas de codificação e arquitetura, 
 
 As aulas teóricas foram ministradas pelo professor Rodrigo Branas.
 
-tasks: 
+## Objetivo
+
+Fornecer a possibilidade de criação de pedidos com itens (produtos) e controle de estoque.
+
+## Arquitetura do projeto
+
+```shell
+src
+|__application # Serviços de aplicação
+  |__query # Serviços de consulta
+  |__use-cases # Serviços de comando
+|__domain
+  |__entity # Entidades, Objetos de valor de negócio com seus casos de uso
+  |__repository # Repositório para persistencia dos agregados de negócio
+|__infra
+  |__broker
+  |__database
+  |__repository
+```
+
+## tasks: 
 
 1 - criar repositórios de banco de dados para todos os agregados
 2 - conectar api
