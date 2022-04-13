@@ -5,13 +5,16 @@ import OrderRepository from '../../../domain/repository/OrderRepository';
 import UseCase from '../UseCase';
 import PlaceOrderInput from './PlaceOrderInput';
 import PlaceOrderOutput from './PlaceOrderOutput';
+import OrderPlacedEvent from './OrderPlacedEvent';
+import DomainEventPublisher from '../../../domain/events/DomainEventPublisher';
 
 export default class PlaceOrder implements UseCase<PlaceOrderInput, PlaceOrderOutput> {
 
   constructor(
     private readonly itemRepository: ItemRepository,
     private readonly orderRepository: OrderRepository,
-    private readonly couponRepository: CouponRepository
+    private readonly couponRepository: CouponRepository,
+    private readonly domainEventPublisher: DomainEventPublisher,
   ) {}
 
   async execute(input: PlaceOrderInput): Promise<PlaceOrderOutput> {
@@ -31,8 +34,11 @@ export default class PlaceOrder implements UseCase<PlaceOrderInput, PlaceOrderOu
     }
 
     await this.orderRepository.save(order);
-    const output = new PlaceOrderOutput(order.getTotal());
 
+    const orderPlacedEvent = new OrderPlacedEvent(order);
+    this.domainEventPublisher.publish('ORDER_PLACED_EVENT', orderPlacedEvent);
+
+    const output = new PlaceOrderOutput(order.getTotal());
     return Promise.resolve(output);
   }
 }

@@ -33,6 +33,9 @@ src
 
 controle de estoque:
 
-5 - deduzir do estoque o item selecionado em um pedido
-6 - aumentar o estoque ao cancelar um pedido
+6 - realiza pedido
+7 - emite evento de pedido realizado
+8 - estoque possui quantidade subiciente?
+8.1 - sim: debita estoque
+8.2 - não: cancela pedido
 (considerar sku em ambos os casos)
