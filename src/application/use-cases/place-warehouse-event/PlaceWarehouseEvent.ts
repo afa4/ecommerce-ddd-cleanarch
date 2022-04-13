@@ -1,33 +1,29 @@
 import UseCase from "../UseCase";
 import PlaceWarehouseEventInput from "./PlaceWarehouseEventInput";
 import WarehouseEventRepository from "../../../domain/repository/WarehouseEventRepository";
-import Warehouse from "../../../domain/entity/warehouse/Warehouse";
 import ItemRepository from "../../../domain/repository/ItemRepository";
 import WarehouseEvent from "../../../domain/entity/warehouse/WarehouseEvent";
-import Item from "../../../domain/entity/item/Item";
 import {WarehouseEventType, warehouseEventTypeFromString} from "../../../domain/entity/warehouse/WarehouseEventType";
+import WarehouseCalculator from '../../../domain/services/warehouse/DefaultWarehouseCalculator';
+import DefaultWarehouseCalculator from '../../../domain/services/warehouse/DefaultWarehouseCalculator';
 
 export default class PlaceWarehouseEvent implements UseCase<PlaceWarehouseEventInput, void> {
 
     constructor(private readonly itemRepository: ItemRepository,
-                private readonly warehouseEventRepository: WarehouseEventRepository) {
+                private readonly warehouseEventRepository: WarehouseEventRepository,
+                private readonly warehouseCalculator: WarehouseCalculator = new DefaultWarehouseCalculator()) {
     }
 
     async execute(input: PlaceWarehouseEventInput): Promise<void> {
         const eventType = warehouseEventTypeFromString(input.eventType);
         const item = await this.itemRepository.findById(input.itemId);
-        const warehouse = await this.getWarehouse(item);
-        if(eventType === WarehouseEventType.ITEM_OUT && input.quantity > warehouse.getQuantity()) {
+        const events = await this.warehouseEventRepository.findByItemId(item.id);
+        const itemQuantityOnStock = this.warehouseCalculator.calculateQuantity(events);
+        if(eventType === WarehouseEventType.ITEM_OUT && input.quantity > itemQuantityOnStock) {
             throw new Error('Out of stock')
         }
         const warehouseEvent = new WarehouseEvent(item, input.quantity, eventType);
         await this.warehouseEventRepository.save(warehouseEvent)
     }
 
-    private async getWarehouse(item: Item): Promise<Warehouse> {
-        const warehouse = new Warehouse(item);
-        const events = await this.warehouseEventRepository.findByItemId(item.id);
-        events.forEach((event) => warehouse.addEvent(event));
-        return warehouse;
-    }
 }
