@@ -18,15 +18,15 @@ describe("WarehouseCalculator", () => {
 
   test("should increment item stock when adds event", () => {
     const quantity = warehouseCalculator.calculateQuantity([
-      new WarehouseEvent(ITEM, 3, WarehouseEventType.ITEM_IN),
+      new WarehouseEvent(1, 3, WarehouseEventType.ITEM_IN),
     ]);
     expect(quantity).toBe(3);
   });
 
   test("should decrement item stock when adds event", () => {
     const quantity = warehouseCalculator.calculateQuantity([
-      new WarehouseEvent(ITEM, 3, WarehouseEventType.ITEM_IN),
-      new WarehouseEvent(ITEM, 1, WarehouseEventType.ITEM_OUT),
+      new WarehouseEvent(1, 3, WarehouseEventType.ITEM_IN),
+      new WarehouseEvent(1, 1, WarehouseEventType.ITEM_OUT),
     ]);
 
     expect(quantity).toBe(2);

@@ -22,7 +22,7 @@ export default class PlaceWarehouseEvent implements UseCase<PlaceWarehouseEventI
         if(eventType === WarehouseEventType.ITEM_OUT && input.quantity > itemQuantityOnStock) {
             throw new Error('Out of stock')
         }
-        const warehouseEvent = new WarehouseEvent(item, input.quantity, eventType);
+        const warehouseEvent = new WarehouseEvent(item.id, input.quantity, eventType);
         await this.warehouseEventRepository.save(warehouseEvent)
     }
 

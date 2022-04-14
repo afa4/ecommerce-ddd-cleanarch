@@ -9,10 +9,10 @@ export default class WarehouseEventMemoryRepository implements WarehouseEventRep
 
     private readonly warehouseEvents: { [itemId: string]: WarehouseEvent[] } = {
         1: [
-            new WarehouseEvent(this.ITEM, 5, WarehouseEventType.ITEM_IN),
-            new WarehouseEvent(this.ITEM, 2, WarehouseEventType.ITEM_OUT),
-            new WarehouseEvent(this.ITEM, 5, WarehouseEventType.ITEM_IN),
-            new WarehouseEvent(this.ITEM, 1, WarehouseEventType.ITEM_OUT)
+            new WarehouseEvent(1, 5, WarehouseEventType.ITEM_IN),
+            new WarehouseEvent(1, 2, WarehouseEventType.ITEM_OUT),
+            new WarehouseEvent(1, 5, WarehouseEventType.ITEM_IN),
+            new WarehouseEvent(1, 1, WarehouseEventType.ITEM_OUT)
         ]
     }
 
