@@ -1,3 +1,5 @@
+import DomainEvent from "./DomainEvent";
+
 export default interface DomainEventPublisher {
-  publish(eventName: string, eventContent: any): void;
+  publish(event: DomainEvent): void;
 }

@@ -5,7 +5,7 @@ import OrderRepository from '../../../domain/repository/OrderRepository';
 import UseCase from '../UseCase';
 import PlaceOrderInput from './PlaceOrderInput';
 import PlaceOrderOutput from './PlaceOrderOutput';
-import OrderPlacedEvent from './OrderPlacedEvent';
+import OrderPlacedEvent from '../../../domain/events/OrderPlacedEvent';
 import DomainEventPublisher from '../../../domain/events/DomainEventPublisher';
 
 export default class PlaceOrder implements UseCase<PlaceOrderInput, PlaceOrderOutput> {
@@ -32,12 +32,8 @@ export default class PlaceOrder implements UseCase<PlaceOrderInput, PlaceOrderOu
         order.addCoupon(coupon);
       }
     }
-
     await this.orderRepository.save(order);
-
-    const orderPlacedEvent = new OrderPlacedEvent(order);
-    this.domainEventPublisher.publish('ORDER_PLACED_EVENT', orderPlacedEvent);
-
+    this.domainEventPublisher.publish(new OrderPlacedEvent(order));
     const output = new PlaceOrderOutput(order.getTotal());
     return Promise.resolve(output);
   }

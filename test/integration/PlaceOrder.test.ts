@@ -9,9 +9,7 @@ import OrderMemoryRepository from "../../src/infra/repository/memory/OrderMemory
 import CouponMemoryRepository from "../../src/infra/repository/memory/CouponMemoryRepository";
 import DomainEventPublisher from "../../src/domain/events/DomainEventPublisher";
 import ItemMemoryRepository from '../../src/infra/repository/memory/ItemMemoryRepository';
-import EventLoopPublisher from '../../src/infra/events/nodejs/publisher/EventLoopPublisher';
-import {EventEmitter} from 'events';
-import EventLoopSubscriber from '../../src/infra/events/nodejs/subscriber/EventLoopSubscriber'
+import SyncEventsBroker from "../../src/infra/events/sync/SyncEventsBroker";
 
 describe("PlaceOrderTest", () => {
   let placeOrder: PlaceOrder;
@@ -24,13 +22,7 @@ describe("PlaceOrderTest", () => {
     itemRepository = new ItemMemoryRepository();
     orderRepository = new OrderMemoryRepository();
     couponRepository = new CouponMemoryRepository();
-    
-    const eventEmitter = new EventEmitter();
-    const eventLoopSubscriber = new EventLoopSubscriber(eventEmitter);
-    eventLoopSubscriber.subscribe('ORDER_PLACED_EVENT', (eventContent) => {
-      console.log('Async Subscriber: Order Placed');
-    });
-    domainEventPublisher = new EventLoopPublisher(eventEmitter);
+    domainEventPublisher = new SyncEventsBroker([]);
 
     placeOrder = new PlaceOrder(
       itemRepository,

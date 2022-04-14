@@ -1,4 +1,6 @@
-export default interface Handler<T> {
-    name: string;
-    handle(event: T): Promise<void>;
+import DomainEvent from "../../domain/events/DomainEvent";
+
+export default interface Handler {
+    eventName: string;
+    handle(event: DomainEvent): Promise<void>;
 }

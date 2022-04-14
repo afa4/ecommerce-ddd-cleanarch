@@ -1,12 +1,8 @@
 import WarehouseEventRepository from "../../../domain/repository/WarehouseEventRepository";
 import WarehouseEvent from "../../../domain/entity/warehouse/WarehouseEvent";
-import Item from "../../../domain/entity/item/Item";
-import ItemVolume from "../../../domain/entity/item/ItemVolume";
 import {WarehouseEventType} from "../../../domain/entity/warehouse/WarehouseEventType";
 
 export default class WarehouseEventMemoryRepository implements WarehouseEventRepository {
-    private readonly ITEM = new Item(1, 'Freezer', 1000, new ItemVolume(200, 100, 50, 40));
-
     private readonly warehouseEvents: { [itemId: string]: WarehouseEvent[] } = {
         1: [
             new WarehouseEvent(1, 5, WarehouseEventType.ITEM_IN),
