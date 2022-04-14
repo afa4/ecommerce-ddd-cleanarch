@@ -8,43 +8,35 @@ import OrderRepository from "../../src/domain/repository/OrderRepository";
 import OrderMemoryRepository from "../../src/infra/repository/memory/OrderMemoryRepository";
 import CouponMemoryRepository from "../../src/infra/repository/memory/CouponMemoryRepository";
 import DomainEventPublisher from "../../src/domain/events/DomainEventPublisher";
-import OrderPlacedEvent from "../../src/application/use-cases/place-order/OrderPlacedEvent";
-import SyncEventsBroker from "../../src/infra/events/sync/SyncEventsBroker";
 import ItemMemoryRepository from '../../src/infra/repository/memory/ItemMemoryRepository';
 import EventLoopPublisher from '../../src/infra/events/nodejs/publisher/EventLoopPublisher';
 import {EventEmitter} from 'events';
-import OrderPlacedEventSubsriber from '../../src/infra/events/nodejs/subscriber/impl/OrderPlacedEventSubscriber'
+import EventLoopSubscriber from '../../src/infra/events/nodejs/subscriber/EventLoopSubscriber'
 
-describe.only("PlaceOrderTest", () => {
+describe("PlaceOrderTest", () => {
   let placeOrder: PlaceOrder;
   let itemRepository: ItemRepository;
   let orderRepository: OrderRepository;
   let couponRepository: CouponRepository;
   let domainEventPublisher: DomainEventPublisher;
-  let nodejsPublisher: DomainEventPublisher;
 
   beforeEach(() => {
     itemRepository = new ItemMemoryRepository();
     orderRepository = new OrderMemoryRepository();
     couponRepository = new CouponMemoryRepository();
-    domainEventPublisher = new SyncEventsBroker([
-      {
-        name: "ORDER_PLACED_EVENT",
-        handle: (event: OrderPlacedEvent) => {
-          console.log("OrderPlacedBroker (handler 1): EVENT RECEIVED");
-          return Promise.resolve();
-        },
-      },
-    ]);
+    
     const eventEmitter = new EventEmitter();
-    const asyncHandler = new OrderPlacedEventSubsriber(eventEmitter);
-    nodejsPublisher = new EventLoopPublisher(eventEmitter)
+    const eventLoopSubscriber = new EventLoopSubscriber(eventEmitter);
+    eventLoopSubscriber.subscribe('ORDER_PLACED_EVENT', (eventContent) => {
+      console.log('Async Subscriber: Order Placed');
+    });
+    domainEventPublisher = new EventLoopPublisher(eventEmitter);
 
     placeOrder = new PlaceOrder(
       itemRepository,
       orderRepository,
       couponRepository,
-      nodejsPublisher
+      domainEventPublisher
     );
   });
 
@@ -145,6 +137,18 @@ describe.only("PlaceOrderTest", () => {
   });
 
   test("should place order with coupon", async () => {
+    const placeOrderInput = {
+      cpf: "935.411.347-80",
+      orderItems: [{ itemId: 1, quantity: 1 }],
+      date: new Date("2021-12-27"),
+      coupon: "VALE20",
+    };
+
+    const output = await placeOrder.execute(placeOrderInput);
+    await expect(output.total).toBe(1200); // total (800) + freight (400)
+  });
+
+  test("should publish an OrderPlaced", async () => {
     const placeOrderInput = {
       cpf: "935.411.347-80",
       orderItems: [{ itemId: 1, quantity: 1 }],

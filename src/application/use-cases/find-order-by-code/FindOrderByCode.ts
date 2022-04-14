@@ -2,6 +2,7 @@ import UseCase from "../UseCase";
 import FindOrderByCodeOutput from "./FindOrderByCodeOutput";
 import OrderRepository from "../../../domain/repository/OrderRepository";
 
+// TODO: Change to query package
 export default class FindOrderByCode implements UseCase<string, FindOrderByCodeOutput> {
 
     constructor(private readonly orderRepository: OrderRepository) {

@@ -5,9 +5,7 @@ export default class EventLoopPublisher implements DomainEventPublisher {
 
   constructor(private readonly eventEmitter: EventEmitter) {}
 
-  publish(eventName: string, eventContent: any): Promise<void>
-  {
+  publish(eventName: string, eventContent: any) {
     this.eventEmitter.emit(eventName, eventContent);
-    return Promise.resolve();
   }
 }

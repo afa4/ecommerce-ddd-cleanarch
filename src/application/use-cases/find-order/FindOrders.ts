@@ -2,6 +2,7 @@ import UseCase from "../UseCase";
 import FindOrdersOutput from './FindOrdersOutput';
 import OrderRepository from "../../../domain/repository/OrderRepository";
 
+// TODO: Change to query package
 export default class FindOrders implements UseCase<void, FindOrdersOutput> {
 
     constructor(private readonly orderRepository: OrderRepository) {
