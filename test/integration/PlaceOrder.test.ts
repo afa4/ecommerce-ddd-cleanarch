@@ -148,7 +148,8 @@ describe("PlaceOrderTest", () => {
     await expect(output.total).toBe(1200); // total (800) + freight (400)
   });
 
-  test("should publish an OrderPlaced", async () => {
+  test("should publish an OrderPlaced event", async () => {
+    const domainEventPublisherSpy = jest.spyOn(domainEventPublisher, "publish");
     const placeOrderInput = {
       cpf: "935.411.347-80",
       orderItems: [{ itemId: 1, quantity: 1 }],
@@ -156,7 +157,7 @@ describe("PlaceOrderTest", () => {
       coupon: "VALE20",
     };
 
-    const output = await placeOrder.execute(placeOrderInput);
-    await expect(output.total).toBe(1200); // total (800) + freight (400)
+    await placeOrder.execute(placeOrderInput);
+    await expect(domainEventPublisherSpy).toBeCalled();
   });
 });
