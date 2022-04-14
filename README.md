@@ -33,9 +33,9 @@ src
 
 controle de estoque:
 
-6 - realiza pedido
-7 - emite evento de pedido realizado
-8 - estoque possui quantidade subiciente?
-8.1 - sim: debita estoque
+6 - realiza pedido (OK)
+7 - emite evento de pedido realizado (OK)
+8 - estoque possui quantidade subiciente? (OK)
+8.1 - sim: debita estoque (OK)
 8.2 - não: cancela pedido
 (considerar sku em ambos os casos)
