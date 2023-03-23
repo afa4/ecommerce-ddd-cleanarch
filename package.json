@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --maxWorkers=1",
     "test:unit": "jest ./test/unit",
     "test:integration": "jest ./test/integration",
     "test:coverage": "jest ./dist/test --coverage",
@@ -14,12 +14,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mysql": "^2.18.1",
     "pg-promise": "^10.11.1"
   },
   "devDependencies": {
-    "typescript": "^4.5.4",
-    "jest": "^27.4.5",
     "@types/jest": "^27.4.1",
-    "ts-jest": "^27.1.4"
+    "@types/mysql": "^2.15.21",
+    "jest": "^27.4.5",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.5.4"
   }
 }

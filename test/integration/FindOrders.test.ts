@@ -1,21 +1,25 @@
-import OrderMemoryRepository from "../../src/infra/repository/memory/OrderMemoryRepository";
-import FindOrders from "../../src/application/use-cases/find-order/FindOrders";
-import OrderRepository from "../../src/domain/repository/OrderRepository";
-import Order from "../../src/domain/entity/order/Order";
+import FindOrders from "../../src/application/query/find-order/FindOrders";
+import MySqlConnectionAdapter from "../../src/infra/database/MySqlConnectionAdapter";
 
 let findOrders: FindOrders;
-let orderRepository: OrderRepository;
+
+const connection = new MySqlConnectionAdapter({
+  database: "db",
+  host: "localhost",
+  port: "3307",
+  user: "root",
+  password: "root",
+});
 
 beforeEach(async () => {
-    orderRepository = new OrderMemoryRepository();
-    findOrders = new FindOrders(orderRepository);
-
-    const order = new Order('935.411.347-80', new Date('2021-01-01'));
-    order.setSequence(await orderRepository.getSequence());
-    await orderRepository.save(order);
+  findOrders = new FindOrders(connection);
 });
 
-test('should return order list', async () => {
-    const output = await findOrders.execute();
-    expect(output.orders.length).toBe(1);
+test("should return order list", async () => {
+  const output = await findOrders.execute();
+  expect(output.orders.length).toBe(1);
 });
+
+afterAll(async () => {
+  await connection.disconnect();
+})

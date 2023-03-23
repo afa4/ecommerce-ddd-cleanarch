@@ -23,19 +23,3 @@ src
   |__database
   |__repository
 ```
-
-## tasks: 
-
-1 - criar repositórios de banco de dados para todos os agregados
-2 - conectar api
-3 - criar testes de integração para api
-4 - criar uma interface cli para consultar pedidos
-
-controle de estoque:
-
-6 - realiza pedido (OK)
-7 - emite evento de pedido realizado (OK)
-8 - estoque possui quantidade subiciente? (OK)
-8.1 - sim: debita estoque (OK)
-8.2 - não: cancela pedido
-(considerar sku em ambos os casos)

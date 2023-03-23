@@ -1,12 +1,21 @@
 version: "3.8"
 services:
   db:
-    image: "postgres"
+    image: mysql:5.7
+    container_name: my_db
     ports:
-      - "5432:5432"
+      - 3307:3306
+    command: --innodb-use-native-aio=0
+    restart: always
+    tty: true
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=root
     volumes:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=dbpass
-      - POSTGRES_DB=app
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
