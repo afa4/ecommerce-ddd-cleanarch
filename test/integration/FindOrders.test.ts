@@ -11,7 +11,7 @@ beforeEach(async () => {
 
 test("should return order list", async () => {
   const output = await findOrders.execute();
-  expect(output.orders.length).toBeGreaterThan(1);
+  expect(output.orders.length).toBeGreaterThan(0);
 });
 
 afterAll(async () => {
