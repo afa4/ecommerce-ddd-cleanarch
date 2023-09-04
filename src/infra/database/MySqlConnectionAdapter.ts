@@ -17,6 +17,16 @@ export default class MySqlConnectionAdapter implements Connection {
     );
   }
 
+  public static startDefault() {
+    return new MySqlConnectionAdapter({
+      database: "db",
+      host: "127.0.0.1",
+      port: "3307",
+      user: "root",
+      password: "root",
+    });
+  }
+
   async query(query: string, args: any[] = []): Promise<any> {
     args.forEach((value: any, index: number) => {
       if (value instanceof Date) {
