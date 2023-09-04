@@ -6,13 +6,7 @@ import Item from "../../src/domain/entity/item/Item";
 import ItemVolume from "../../src/domain/entity/item/ItemVolume";
 
 let orderRepository: OrderRepository;
-const connection = new MySqlConnectionAdapter({
-    database: "db",
-    host: "localhost",
-    port: "3307",
-    user: "root",
-    password: "root",
-  });
+const connection = MySqlConnectionAdapter.startDefault();
 
 beforeEach(() => {
     orderRepository = new OrderDatabaseRepository(connection);

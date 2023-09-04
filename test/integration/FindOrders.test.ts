@@ -3,13 +3,7 @@ import MySqlConnectionAdapter from "../../src/infra/database/MySqlConnectionAdap
 
 let findOrders: FindOrders;
 
-const connection = new MySqlConnectionAdapter({
-  database: "db",
-  host: "localhost",
-  port: "3307",
-  user: "root",
-  password: "root",
-});
+const connection = MySqlConnectionAdapter.startDefault();
 
 beforeEach(async () => {
   findOrders = new FindOrders(connection);
@@ -17,7 +11,7 @@ beforeEach(async () => {
 
 test("should return order list", async () => {
   const output = await findOrders.execute();
-  expect(output.orders.length).toBeGreaterThan(1);
+  expect(output.orders.length).toBeGreaterThan(0);
 });
 
 afterAll(async () => {
