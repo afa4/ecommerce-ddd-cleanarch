@@ -19,6 +19,7 @@ src
   |__entity # Entidades, Objetos de valor de negócio com seus casos de uso
   |__repository # Repositório para persistencia dos agregados de negócio
 |__infra
+  |__api
   |__broker
   |__database
   |__repository
