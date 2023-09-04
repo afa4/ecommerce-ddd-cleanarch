@@ -2,14 +2,7 @@ import FindOrderByCode from "../../src/application/query/find-order-by-code/Find
 import MySqlConnectionAdapter from "../../src/infra/database/MySqlConnectionAdapter";
 
 let findOrderByCode: FindOrderByCode;
-const connection = new MySqlConnectionAdapter({
-  database: "db",
-  host: "localhost",
-  port: "3307",
-  user: "root",
-  password: "root",
-});
-
+const connection = MySqlConnectionAdapter.startDefault();
 beforeEach(() => {
   findOrderByCode = new FindOrderByCode(connection);
 });

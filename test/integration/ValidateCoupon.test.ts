@@ -6,13 +6,7 @@ import MySqlConnectionAdapter from "../../src/infra/database/MySqlConnectionAdap
 let validateCoupon: ValidateCoupon;
 let couponRepository: CouponRepository;
 
-const connection = new MySqlConnectionAdapter({
-  database: "db",
-  host: "localhost",
-  port: "3307",
-  user: "root",
-  password: "root",
-});
+const connection = MySqlConnectionAdapter.startDefault();
 
 beforeEach(() => {
   couponRepository = new CouponDatabaseRepository(connection);

@@ -3,13 +3,7 @@ import MySqlConnectionAdapter from "../../src/infra/database/MySqlConnectionAdap
 
 let findOrders: FindOrders;
 
-const connection = new MySqlConnectionAdapter({
-  database: "db",
-  host: "localhost",
-  port: "3307",
-  user: "root",
-  password: "root",
-});
+const connection = MySqlConnectionAdapter.startDefault();
 
 beforeEach(async () => {
   findOrders = new FindOrders(connection);
